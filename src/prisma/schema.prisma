@@ -1,0 +1,38 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("localhost:27017")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Word {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  word      String
+  type      String // 词性
+  examples  String[] // 例句
+  chinese   String // 中文解释
+  lesson    Int
+  material  String
+}
+
+model Phrase {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  phrase    String
+  examples  String[]
+  chinese   String // 中文解释
+  Lesson    Int
+  material  String
+}
+
+model Grammar {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  name      String
+  desc      String
+  examples  String[]
+  chinese   String // 中文解释
+}
